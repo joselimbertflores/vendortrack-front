@@ -116,7 +116,7 @@ export class PdfService {
                     {
                       text: [
                         { text: 'PISO: ', style: 'theme' },
-                        { text: certificate.stall.location },
+                        { text: certificate.stall.floor ?? '' },
                       ],
                     },
                     {

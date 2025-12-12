@@ -4,7 +4,8 @@ interface stallProps {
   id: string;
   number: number;
   area: string;
-  location: string;
+  location?: string;
+  floor: number;
   market: string;
   category: string;
   taxZone: string;
@@ -14,7 +15,8 @@ export class Stall {
   id: string;
   number: number;
   area: string;
-  location: string;
+  location?: string;
+  floor: number;
   market: string;
   category: string;
   taxZone: string;
@@ -28,6 +30,7 @@ export class Stall {
     trader,
     category,
     taxZone,
+    floor,
   }: stallProps) {
     this.id = id;
     this.number = number;
@@ -37,5 +40,6 @@ export class Stall {
     this.trader = trader;
     this.category = category;
     this.taxZone = taxZone;
+    this.floor = floor;
   }
 }

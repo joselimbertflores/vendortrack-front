@@ -49,9 +49,9 @@ import { Stall } from '../../../domain';
     <mat-dialog-content>
       <div class="py-2">
         <form [formGroup]="stallForm">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
             @if(!data){
-            <div class="col-span-2">
+            <div class="sm:col-span-3">
               <select-search
                 title="Seleccionar Mercado"
                 [items]="markets()"
@@ -59,7 +59,7 @@ import { Stall } from '../../../domain';
                 [required]="true"
               />
             </div>
-            <div class="col-span-2">
+            <div class="sm:col-span-3">
               <select-search
                 title="Seleccionar Categoria"
                 [items]="categories()"
@@ -67,7 +67,7 @@ import { Stall } from '../../../domain';
                 [required]="true"
               />
             </div>
-            <div class="col-span-2">
+            <div class="sm:col-span-3">
               <select-search
                 title="Zona tibutaria"
                 [items]="taxZones()"
@@ -76,11 +76,16 @@ import { Stall } from '../../../domain';
               />
             </div>
             }
-            <div class="col-span-2">
+            <div class="sm:col-span-3">
               @if(currentTraderFullName()){
               <mat-form-field>
                 <mat-label>Comerciante</mat-label>
-                <input matInput type="text" [value]="currentTraderFullName()" readonly />
+                <input
+                  matInput
+                  type="text"
+                  [value]="currentTraderFullName()"
+                  readonly
+                />
                 <button
                   matSuffix
                   matIconButton
@@ -102,29 +107,28 @@ import { Stall } from '../../../domain';
               />
               }
             </div>
-
-            <div class="col-span-2">
+            @if(!data){
+            <mat-form-field>
+              <mat-label>Numero Piso</mat-label>
+              <input matInput type="number" min="1" formControlName="floor" />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Numero Puesto</mat-label>
+              <input matInput type="number" formControlName="number" />
+            </mat-form-field>
+            }
+            <mat-form-field>
+              <mat-label>Area / m2</mat-label>
+              <input matInput formControlName="area" type="number" step="0.01" />
+            </mat-form-field>
+            <div class="sm:col-span-2">
               <mat-form-field>
-                <mat-label>Ubicacion puesto</mat-label>
+                <mat-label>Ubicacion puesto (OPCIONAL)</mat-label>
                 <input
                   matInput
                   formControlName="location"
-                  placeholder="Ejemplo: Numero de piso"
+                  placeholder="Ejemplo: Seccion, pasillo"
                 />
-              </mat-form-field>
-            </div>
-            @if(!data){
-            <div>
-              <mat-form-field>
-                <mat-label>Numero Puesto</mat-label>
-                <input matInput formControlName="number" />
-              </mat-form-field>
-            </div>
-            }
-            <div>
-              <mat-form-field>
-                <mat-label>Area / m2</mat-label>
-                <input matInput formControlName="area" />
               </mat-form-field>
             </div>
           </div>
@@ -193,7 +197,11 @@ export class StallDialogComponent implements OnInit {
       : this.formBuilder.group({
           number: ['', Validators.required],
           area: ['', Validators.required],
-          location: ['', Validators.required],
+          floor: [
+            null,
+            [Validators.required, Validators.min(1), Validators.max(9999)],
+          ],
+          location: [''],
           traderId: ['', Validators.required],
           marketId: ['', Validators.required],
           categoryId: ['', Validators.required],

@@ -5,6 +5,7 @@ export interface stallResponde {
   number: number;
   area: string;
   location: string;
+  floor: number;
   market: marketProps;
   trader?: traderResponse;
   category: categoryProps;

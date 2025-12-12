@@ -65,7 +65,12 @@ import { SearchInputComponent } from '../../../../shared';
       <ng-container matColumnDef="phone">
         <th mat-header-cell *matHeaderCellDef>Telefono</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.phone }}
+          @if(element.phone){
+            {{ element.phone }}
+          }
+          @else {
+            <span>----</span>
+          }
         </td>
       </ng-container>
 

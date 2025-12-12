@@ -77,9 +77,9 @@ import { SearchInputComponent } from '../../../../shared';
       </ng-container>
 
       <ng-container matColumnDef="location">
-        <th mat-header-cell *matHeaderCellDef>Ubicacion</th>
+        <th mat-header-cell *matHeaderCellDef>Piso</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.location }}
+          Piso {{ element.floor }}
         </td>
       </ng-container>
       <ng-container matColumnDef="area">
@@ -173,8 +173,8 @@ export default class StallsComponent {
 
   create(): void {
     const dialogRef = this.dialogRef.open(StallDialogComponent, {
-      width: '600px',
-      maxWidth: '600px',
+      width: '700px',
+      maxWidth: '700px',
     });
     dialogRef.afterClosed().subscribe((result?) => {
       if (!result) return;
@@ -187,8 +187,8 @@ export default class StallsComponent {
 
   update(element: Stall) {
     const dialogRef = this.dialogRef.open(StallDialogComponent, {
-      width: '600px',
-      maxWidth: '600px',
+      width: '700px',
+      maxWidth: '700px',
       data: element,
     });
     dialogRef.afterClosed().subscribe((result: Stall | undefined) => {
